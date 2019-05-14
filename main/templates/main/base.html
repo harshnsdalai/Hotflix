@@ -35,6 +35,9 @@
             <a class="nav-link" href="{% url 'log_out' %}">Log Out</a>
         </li>
         {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'sign_up' %}">Register <span class="sr-only">(current)</span></a>
+            </li>
             
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'log_in' %}">Log In</a>

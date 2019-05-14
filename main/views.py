@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.models import User
 
-# from .models import My_list
+from .models import My_list
 from .forms import SignUp, LogIn
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
@@ -60,4 +60,4 @@ def log_in(request):
 @login_required
 def log_out(request):
     logout(request)
-    return redirect('log_in')
+    return redirect('home')
