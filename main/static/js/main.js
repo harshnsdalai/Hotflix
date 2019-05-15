@@ -39,3 +39,19 @@ function create_post(){
         }
     });
 };
+
+function popular(){
+    $.getJSON("https://www.episodate.com/api/most-popular?page=1", function(data){
+        console.log(data);
+
+        $.each(data.tv_shows, function(index, value){
+            console.log(value)
+
+            var title = value.name
+            console.log(title)
+            var img = value.image_thumbnail_path
+
+            $("#list-div").append('<h1>'+title+'</h1>'+'<a href=""><img src ="'+img+'"></a>')
+        })
+    })
+}
