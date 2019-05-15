@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.models import User
-
+import json
 from .models import My_list
 from .forms import SignUp, LogIn
 from django.http import HttpResponseRedirect, HttpResponse
@@ -29,7 +29,7 @@ def sign_up(request):
                 User.objects.create_user(username, email, password)
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return HttpResponseRedirect("/")
+                return HttpResponseRedirect("browse/")
             else:
                 raise forms.ValidationError('Looks like a username with that email or password already exists')
     else:
@@ -45,7 +45,7 @@ def log_in(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return HttpResponseRedirect(reverse('browse'))
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -61,3 +61,31 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return redirect('home')
+
+
+def browse(request):
+    return render(request, 'main/home.html')
+
+
+def my_list(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        response_data = {}
+
+        post = My_list(title=title, user=request.user)
+        post.save()
+
+        response_data['result'] = 'Create post successful!'
+        response_data['post_pk'] = post.pk
+        response_data['title'] = post.title
+        response_data['user'] = post.user.username
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
