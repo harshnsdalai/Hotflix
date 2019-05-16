@@ -91,3 +91,8 @@ def my_list(request):
         )
 
 
+def detail(request, permalink):
+    return render(request, 'main/detail.html', {'permalink': permalink})
+
+
+

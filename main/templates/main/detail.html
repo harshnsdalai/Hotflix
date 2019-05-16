@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div id="detail_div">
+    <input id ="bc" type="hidden" value="{{permalink}}">
+</div>
+<div>
+<h1 id="name"></h1>
+<h2 id="description"></h2>
+<h2 id="status"></h2>
+<form method='POST' id="title" action="#">{% csrf_token %}
+        <input type="hidden" value="arrow" name="title" id="title_val">
+        <button type="submit"></button>
+
+
+
+</form>
+</div>
+
+<div id="moreinfo"></div>
+
+<div id="detail-div"></div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+var permalink = $("#bc").val();
+console.log(permalink)
+detail(permalink);
+//console.log(typeof 42)
+//console.log(typeof String({{ permalink }}))</script>
+
+{% endblock  %}

@@ -10,5 +10,6 @@ urlpatterns = [
     path("logout/", views.log_out, name="log_out"),
     path("register/", views.sign_up, name="sign_up"),
     path("browse/", views.browse, name="browse"),
-    path("browse/my_list/", views.my_list, name="my_list")
+    path("browse/my_list/", views.my_list, name="my_list"),
+    path("browse/detail/<str:permalink>", views.detail, name="detail")
 ]
