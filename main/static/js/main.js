@@ -22,11 +22,11 @@ function create_post(){
     $.ajax({
         url : "my_list/", // the endpoint
         type : "POST", // http method
-        data : { title : $('#title_val').val() }, // data sent with the post request
+        data : { title : $('#title_val').val(), perma : $("#perma_val").val() }, // data sent with the post request
 
         // handle a successful response
         success : function(json) {
-            $('#title_val').val(''); // remove the value from the input
+            //$('#title_val').val(''); // remove the value from the input
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
         },
@@ -76,22 +76,24 @@ function detail(permalink){
         $("#status").html(status)
         $("#moreinfo").html('<a>'+url+'</a>')
         console.log(url)
+        $("#title_val").val(name);
+        console.log("hola bro"+$("#title_val").val())
         $.each(permalink_data.episodes, function(index,value){
             //console.log(index)
             //console.log(value.name)
             //console.log(permalink_data.episodes)
 
             var season = value.season;
-            console.log(season)
+            //console.log(season)
             var episode = value.episode;
-            console.log(episode)
+            //console.log(episode)
 
             var name = value.name;
-            console.log(name)
+            //console.log(name)
             var date = value.air_date;
-            console.log(date)
+            //console.log(date)
             //var url = "{% url 'detail' permalink="+permalink+" %}"
-
+            
             $("#detail-div").append('<h1>Season:'+season+'</br>Episode'+episode+'</h1>'+'<h1>Name:'+name+'</br>Air date'+date+'</h1>')
         })
     })

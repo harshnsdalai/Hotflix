@@ -10,8 +10,10 @@
 <h2 id="description"></h2>
 <h2 id="status"></h2>
 <form method='POST' id="title" action="#">{% csrf_token %}
-        <input type="hidden" value="arrow" name="title" id="title_val">
-        <button type="submit"></button>
+        <input type="hidden" value=""  id="title_val">
+        <input type="hidden" value="{{permalink}}"  id="perma_val">
+
+        <button type="submit">add to my list</button>
 
 
 

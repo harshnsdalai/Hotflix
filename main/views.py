@@ -70,15 +70,17 @@ def browse(request):
 def my_list(request):
     if request.method == 'POST':
         title = request.POST.get('title')
+        perma = request.POST.get('perma')
         response_data = {}
 
-        post = My_list(title=title, user=request.user)
+        post = My_list(title=title, user=request.user, perma=perma)
         post.save()
 
         response_data['result'] = 'Create post successful!'
         response_data['post_pk'] = post.pk
         response_data['title'] = post.title
         response_data['user'] = post.user.username
+        response_data['perma'] = post.perma
 
         return HttpResponse(
             json.dumps(response_data),
