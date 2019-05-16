@@ -29,7 +29,7 @@ def sign_up(request):
                 User.objects.create_user(username, email, password)
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return HttpResponseRedirect("browse/")
+                return HttpResponseRedirect(reverse('browse'))
             else:
                 raise forms.ValidationError('Looks like a username with that email or password already exists')
     else:
@@ -72,20 +72,20 @@ def my_list(request):
         title = request.POST.get('title')
         perma = request.POST.get('perma')
         response_data = {}
+        if not (My_list.objects.filter(title=title,user=request.user).exists()):
+            post = My_list(title=title, user=request.user, perma=perma)
+            post.save()
 
-        post = My_list(title=title, user=request.user, perma=perma)
-        post.save()
+            response_data['result'] = 'Create post successful!'
+            response_data['post_pk'] = post.pk
+            response_data['title'] = post.title
+            response_data['user'] = post.user.username
+            response_data['perma'] = post.perma
 
-        response_data['result'] = 'Create post successful!'
-        response_data['post_pk'] = post.pk
-        response_data['title'] = post.title
-        response_data['user'] = post.user.username
-        response_data['perma'] = post.perma
-
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
+            return HttpResponse(
+                json.dumps(response_data),
+                content_type="application/json"
+            )
     else:
         return HttpResponse(
             json.dumps({"nothing to see": "this isn't happening"}),
@@ -94,7 +94,14 @@ def my_list(request):
 
 
 def detail(request, permalink):
-    return render(request, 'main/detail.html', {'permalink': permalink})
+    if not (My_list.objects.filter(perma=permalink,user=request.user).exists()):
+        c=True
+    else:
+        c=False
+    return render(request, 'main/detail.html', {'permalink': permalink,'c': c })
 
 
+def list(request):
+    post = My_list.objects.filter(user=request.user)
+    return render(request, 'main/list.html', {'posts': post})
 

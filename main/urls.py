@@ -11,5 +11,6 @@ urlpatterns = [
     path("register/", views.sign_up, name="sign_up"),
     path("browse/", views.browse, name="browse"),
     path("browse/detail/my_list/", views.my_list, name="my_list"),
-    path("browse/detail/<str:permalink>", views.detail, name="detail")
+    path("browse/detail/<str:permalink>", views.detail, name="detail"),
+    path("browse/my_list/", views.list, name="list"),
 ]

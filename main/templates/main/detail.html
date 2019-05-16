@@ -9,6 +9,8 @@
 <h1 id="name"></h1>
 <h2 id="description"></h2>
 <h2 id="status"></h2>
+
+{% if c %}
 <form method='POST' id="title" action="#">{% csrf_token %}
         <input type="hidden" value=""  id="title_val">
         <input type="hidden" value="{{permalink}}"  id="perma_val">
@@ -17,7 +19,13 @@
 
 
 
+
 </form>
+
+{% else %}
+<div>In my list</div>
+{% endif %}
+    
 </div>
 
 <div id="moreinfo"></div>
