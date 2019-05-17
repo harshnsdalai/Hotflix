@@ -62,11 +62,11 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
-
+@login_required
 def browse(request):
     return render(request, 'main/home.html')
 
-
+@login_required
 def my_list(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -92,7 +92,7 @@ def my_list(request):
             content_type="application/json"
         )
 
-
+@login_required
 def detail(request, permalink):
     if not (My_list.objects.filter(perma=permalink,user=request.user).exists()):
         c=True
@@ -100,7 +100,7 @@ def detail(request, permalink):
         c=False
     return render(request, 'main/detail.html', {'permalink': permalink,'c': c })
 
-
+@login_required
 def list(request):
     post = My_list.objects.filter(user=request.user)
     return render(request, 'main/list.html', {'posts': post})

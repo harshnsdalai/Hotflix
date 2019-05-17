@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% block content %}
   <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron-fluid">
       <h1>Login here :</h1>
 <form method="post" action="{% url 'log_in' %}">
           {% csrf_token %}
