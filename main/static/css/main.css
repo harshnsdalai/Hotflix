@@ -1,0 +1,31 @@
+html { 
+    background: url("http://www.brandgradients.com/img/backgrounds/netflix-hex-colors-gradient-background.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#hotflix{
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    background: none;
+    color: white
+}
+#land-jumbo{
+    position: relative;
+    top: 15vh;
+    left: 13%;
+    background:none;
+    color: white
+
+}
+.nav-item{
+    position: relative;
+    left: 60vw
+}
+#pop-jumbo{
+    position: relative;
+    color:white;
+    background:none;
+}

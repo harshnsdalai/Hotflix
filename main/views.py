@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     
-    return render(request, 'main/base.html')
+    return render(request, 'main/landing.html')
 
 def sign_up(request):
     if request.method == "POST":
@@ -31,7 +31,7 @@ def sign_up(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('browse'))
             else:
-                raise forms.ValidationError('Looks like a username with that email or password already exists')
+                return HttpResponse("User exist try another username.</br><a href='/register/'>Go Back</a>")
     else:
         form = SignUp()
     return render(request, 'main/register.html', {'form': form})
@@ -51,7 +51,7 @@ def log_in(request):
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
-            return HttpResponse("Invalid login details given")
+            return HttpResponse("Invalid login details given.</br><a href='/login/'>Go Back</a>")
     else:
         form = LogIn()
     return render(request, 'main/login.html', {'form': form})

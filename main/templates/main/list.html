@@ -1,12 +1,18 @@
 {% extends "main/base.html" %}
 {% block content %}
 
+<div class="list-group">
+  
 {% for post in posts %}
-<div class="">
-<h2><a href="{% url 'detail' permalink=post.perma %}">{{ post.title }}</a></h2>
 
-</div>
+  <a href="{% url 'detail' permalink=post.perma %}" class="list-group-item list-group-item-action">
+    #  {{ post.title }}
+  </a>
+ 
+
+
 {% endfor %}
+</div>
 
 
 {% endblock%}

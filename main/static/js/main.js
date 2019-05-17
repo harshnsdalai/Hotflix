@@ -14,7 +14,7 @@ $('#title').on('submit', function(event){
     event.preventDefault();
     console.log("form submitted!")  // sanity check
     create_post();
-    $(this).hide();
+    $(this).html("<div class='alert alert-warning'>Added to list</div>");
 });
 
 function create_post(){
@@ -54,7 +54,13 @@ function popular(){
             var permalink = value.permalink
             //var url = "{% url 'detail' permalink="+permalink+" %}"
 
-            $("#list-div").append('<h1>'+title+'</h1>'+'<a class="detail" href="detail/'+permalink+'" id="'+permalink+'"><img src ="'+img+'"></a>')
+            $("#list-div").append('<div class="card" style="width: 18rem;padding: 7px;margin-bottom :15px;"><img class="card-img-top" src="'+img+'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+title+'</h5><a class= "detail btn btn-primary" id="'+permalink+'" href="detail/'+permalink+'" class="btn btn-primary">Details</a></div></div>')
+
+            
+
+            /*$("#list-div").append('<h1>'+title+'</h1>'+
+            '<a class="detail" href="detail/'+permalink+
+            '" id="'+permalink+'"><img src ="'+img+'"></a>')*/
         })
     })
 }
@@ -95,7 +101,7 @@ function detail(permalink){
             //console.log(date)
             //var url = "{% url 'detail' permalink="+permalink+" %}"
             
-            $("#detail-div").append('<h1>Season:'+season+'</br>Episode'+episode+'</h1>'+'<h1>Name:'+name+'</br>Air date'+date+'</h1>')
+            $("#detail-div").append('<h3>Season--->'+season+'</br>Episode--->'+episode+'</h3>'+'<h4>Name---$'+name+'</br>Air date---<'+date+'</h4><hr>')
         })
     })
     
